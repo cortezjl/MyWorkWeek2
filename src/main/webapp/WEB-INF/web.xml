@@ -1,0 +1,194 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+  <display-name>My Work Week</display-name>
+  <!-- Tell the server to use form-based authentication. -->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page> <!-- page to prompt user for login-->
+      <form-error-page>/loginError.jsp</form-error-page><!-- page to display if login fails-->
+    </form-login-config>
+  </login-config>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/forbidden.jsp</location>
+  </error-page>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>login</web-resource-name>
+      <url-pattern>/loginAction</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+      <role-name>Back Of House</role-name>
+      <role-name>Busser</role-name>
+      <role-name>Front Of House</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>user-search</web-resource-name>
+      <url-pattern>/userSearch.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>user-search-results</web-resource-name>
+      <url-pattern>/userSearchResults.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>user-add-or-edit</web-resource-name>
+      <url-pattern>/userAddEdit.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>user-add-or-edit</web-resource-name>
+      <url-pattern>/addEditUserServlet</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>schedules</web-resource-name>
+      <url-pattern>/schedules.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>schedule-search</web-resource-name>
+      <url-pattern>/scheduleSearch.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>schedules-search-results</web-resource-name>
+      <url-pattern>/scheduleSearchResults.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>schedule-add-edit</web-resource-name>
+      <url-pattern>/scheduleAddEdit.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>time-off-request-search</web-resource-name>
+      <url-pattern>/timeOffRequestSearch.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+      <role-name>Back Of House</role-name>
+      <role-name>Busser</role-name>
+      <role-name>Front Of House</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>time-off-request-search-results</web-resource-name>
+      <url-pattern>/timeOffRequestSearchResults.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+      <role-name>Back Of House</role-name>
+      <role-name>Busser</role-name>
+      <role-name>Front Of House</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>time-off-request-add-or-edit</web-resource-name>
+      <url-pattern>/timeOffRequestAddEdit.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+      <role-name>Back Of House</role-name>
+      <role-name>Busser</role-name>
+      <role-name>Front Of House</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>time-off-request-add-or-edit</web-resource-name>
+      <url-pattern>/addEditTimeOffRequestServlet</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Administrator</role-name>
+      <role-name>Manager</role-name>
+      <role-name>Back Of House</role-name>
+      <role-name>Busser</role-name>
+      <role-name>Front Of House</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <!-- Security roles used by this web application -->
+  <security-role>
+    <role-name>Administrator</role-name>
+  </security-role>
+  <security-role>
+    <role-name>Manager</role-name>
+  </security-role>
+  <security-role>
+    <role-name>Back Of House</role-name>
+  </security-role>
+  <security-role>
+    <role-name>Front Of House</role-name>
+  </security-role>
+  <security-role>
+    <role-name>Busser</role-name>
+  </security-role>
+</web-app>

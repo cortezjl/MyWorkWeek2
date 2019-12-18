@@ -1,0 +1,120 @@
+create database mww;
+
+--
+-- Create Table structure for table `User`
+--
+
+create table user
+(
+    id int auto_increment primary key,
+    first_name    varchar(25) null,
+    last_name     varchar(30) null,
+    user_name     varchar(15) null,
+    password      varchar(30) null,
+    date_of_birth date        null,
+    startDate     date        null,
+    endDate       date        null,
+    constraint users_user_name_uindex
+        unique (user_name)
+);
+-- other fields to consider if I want to use, not necessary at this point
+-- cellphone  varchar(10)  NULL,
+-- homephone  varchar(10)   NULL,
+-- createDate datetime     NULL,
+-- email      varchar(50)  NULL,
+-- updateDate datetime  NULL,
+
+insert into user values (1, 'System', 'Administrator', 'admin', 'password', '2000/01/01', '2019/01/01', '9999/12/31');
+
+--
+-- Create Table structure for table `Role`
+--
+
+create table role (
+   id int(11) NOT NULL AUTO_INCREMENT,
+   role        varchar(20) DEFAULT NULL,
+   user_id     int(11) NOT NULL,
+   user_name   varchar(15) NULL,
+   PRIMARY KEY (id),
+   UNIQUE KEY roles_id_uindex (id),
+   KEY role_user_id_fk (user_id),
+   CONSTRAINT role_user_id_fk FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE,
+   KEY role_user_user_name_fk (user_name),
+   CONSTRAINT role_user_user_name_fk FOREIGN KEY (user_name) REFERENCES user (user_name) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+insert into role values (1, 'Administrator', 1, 'admin');
+
+--
+-- Create Table structure for table `Time_Off_Request`
+--
+
+CREATE TABLE time_off_request (
+      id        int(11)      NOT NULL AUTO_INCREMENT,
+      user_id   int(11)      NOT NULL,
+      user_name varchar(15)  NOT NULL,
+      startDate datetime     NOT NULL,
+      endDate  datetime      NOT NULL,
+      PRIMARY KEY (id),
+      UNIQUE KEY time_off_request_id_uindex (id),
+      KEY time_off_request_user_id_fk (user_id),
+      CONSTRAINT time_off_request_user_id_fk FOREIGN KEY (user_id) REFERENCES user (id),
+      KEY time_off_request_user_user_name_fk (user_name),
+      CONSTRAINT time_off_request_user_user_name_fk FOREIGN KEY (user_name) REFERENCES user (user_name)
+) ;
+
+insert into time_off_request values (1, 1, 'admin', '2019/11/15 08:00:00', '2019/11/15 15:00:00');
+
+  createDate datetime     DEFAULT NULL,
+  updateDate datetime     DEFAULT NULL,
+--
+-- Create Table structure for table `Schedule`
+--
+
+CREATE TABLE schedule (
+  id        int(11)   auto_increment primary key,
+  startDate date      DEFAULT NULL,
+  endDate   date      DEFAULT NULL
+);
+
+insert into schedule values (1, '2019/11/11', '2019/11/18');
+
+--
+-- Create Table structure for table `Schedule_Detail`
+--
+
+CREATE TABLE schedule_detail (
+     id int(11) NOT NULL AUTO_INCREMENT,
+     startTime1 varchar(08) DEFAULT NULL,
+     endTime1   varchar(08) DEFAULT NULL,
+     startTime2 varchar(08) DEFAULT NULL,
+     endTime2   varchar(08) DEFAULT NULL,
+     startTime3 varchar(08) DEFAULT NULL,
+     endTime3   varchar(08) DEFAULT NULL,
+     startTime4 varchar(08) DEFAULT NULL,
+     endTime4   varchar(08) DEFAULT NULL,
+     startTime5 varchar(08) DEFAULT NULL,
+     endTime5   varchar(08) DEFAULT NULL,
+     startTime6 varchar(08) DEFAULT NULL,
+     endTime6   varchar(08) DEFAULT NULL,
+     startTime7 varchar(08) DEFAULT NULL,
+     endTime7   varchar(08) DEFAULT NULL,
+     user_name  varchar(15) NOT NULL,
+     scheduleId int(11) DEFAULT NULL,
+     userId     int(11) DEFAULT NULL,
+     PRIMARY KEY (id),
+     UNIQUE KEY schedule_detail_id_uindex (id),
+     CONSTRAINT schedule_detail_schedule_scheduleId_fk FOREIGN KEY (scheduleId) REFERENCES schedule (id),
+     KEY schedule_detail_schedule_scheduleId_fk (scheduleId),
+     CONSTRAINT schedule_detail_user_userId_fk FOREIGN KEY (userId) REFERENCES user (id),
+     KEY schedule_detail_user_userId_fk (userId),
+     CONSTRAINT schedule_detail_user_userName_fk FOREIGN KEY (user_name) REFERENCES user (user_name),
+     KEY schedule_detail_user_userName_fk (user_name)
+);
+
+insert into schedule values (1, '2019/11/11', '2019/11/18');
+
+insert into schedule_detail values (1, 'open', '04:00 PM', 'open', '04:00 PM','open', '04:00 PM','open', '04:00 PM','open', '04:00 PM','open', '02:00 PM','open', '02:00 PM', 'admin', 1, 1);
+
+
+
